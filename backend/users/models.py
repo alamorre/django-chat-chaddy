@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
+    avatar = models.ImageField(null=True, blank=True)
     custom_json = models.JSONField(null=True, blank=True)
     
 @receiver(post_save, sender=User)
