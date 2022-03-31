@@ -5,7 +5,12 @@ from django.contrib.auth.hashers import make_password
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password']
+        fields = [
+            'id', 
+            'username', 
+            'email', 
+            'password'
+        ]
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data.get('password'))
@@ -13,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.username = validated_data['username']
+        instance.email = validated_data['email']
         password = validated_data.get('password', None)
         if password is not None:
             instance.password = make_password(validated_data.get('password'))
