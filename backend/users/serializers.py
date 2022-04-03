@@ -14,6 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'first_name',
             'last_name',
+            'avatar',
             'custom_json'
         ]
 
