@@ -26,7 +26,7 @@ const Login = () => {
         </h4>
 
         <Form
-          name="basic"
+          name="login"
           labelCol={{ span: 0 }}
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true }}

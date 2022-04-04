@@ -1,8 +1,18 @@
-import { Col, Row, Form, Input, Button, Checkbox } from "antd";
+import { Col, Row, Form, Input, Button } from "antd";
+
+import { createUser } from "./createUser";
 
 const Register = () => {
+  const onSuccess = (r) => {
+    console.log(r.data);
+  };
+
+  const onError = (e) => {
+    console.log(e);
+  };
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+    createUser(values, onSuccess, onError);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -26,7 +36,7 @@ const Register = () => {
         </h4>
 
         <Form
-          name="basic"
+          name="register"
           labelCol={{ span: 0 }}
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true }}
