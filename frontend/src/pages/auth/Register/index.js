@@ -4,14 +4,14 @@ import { Col, Row, Form, Input, Button } from "antd";
 
 import { createUser } from "./createUser";
 
-const Register = () => {
+const Register = (props) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const onSuccess = (r) => {
     setIsLoading(false);
     setError("");
-    window.location.replace("/chats");
+    props.onAuth(r.data);
   };
 
   const onError = (e) => {
