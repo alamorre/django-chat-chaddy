@@ -5,16 +5,18 @@ import { Col, Row, Form, Input, Button } from "antd";
 import { createUser } from "./createUser";
 
 const Register = () => {
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const onSuccess = (r) => {
     setIsLoading(false);
-    console.log(r.data);
+    setError("");
+    window.location.replace("/chats");
   };
 
   const onError = (e) => {
     setIsLoading(false);
-    console.log(e);
+    setError(e);
   };
 
   const onFinish = (values) => {
@@ -105,6 +107,8 @@ const Register = () => {
               Submit
             </Button>
           </Form.Item>
+
+          <div style={{ color: "#f5222d" }}>{error.toString()}</div>
         </Form>
       </Col>
     </Row>

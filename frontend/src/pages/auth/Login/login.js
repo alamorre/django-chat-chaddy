@@ -9,5 +9,5 @@ export const login = (values, onSuccess, onError) => {
       headers: { Authorization: `Basic ${token}` },
     })
     .then((r) => onSuccess(r))
-    .catch((e) => onError(e));
+    .catch((e) => onError(e.response.data));
 };

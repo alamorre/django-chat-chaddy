@@ -5,16 +5,18 @@ import { Col, Row, Form, Input, Button, Checkbox } from "antd";
 import { login } from "./login";
 
 const Login = () => {
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const onSuccess = (r) => {
     setIsLoading(false);
-    console.log(r.data);
+    setError("");
+    window.location.replace("/chats");
   };
 
   const onError = (e) => {
     setIsLoading(false);
-    console.log(e);
+    setError(e.detail);
   };
 
   const onFinish = (values) => {
@@ -68,20 +70,18 @@ const Login = () => {
             <Input.Password placeholder="Password" />
           </Form.Item>
 
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{ span: 24 }}
-          >
+          <Form.Item name="remember" valuePropName="checked">
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <Form.Item wrapperCol={{ span: 24 }}>
+          <Form.Item>
             <Button type="primary" htmlType="submit" block loading={isLoading}>
               Submit
             </Button>
           </Form.Item>
         </Form>
+
+        <div style={{ color: "#f5222d" }}>{error}</div>
       </Col>
     </Row>
   );
