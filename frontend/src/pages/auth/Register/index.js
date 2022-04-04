@@ -1,17 +1,24 @@
+import { useState } from "react";
+
 import { Col, Row, Form, Input, Button } from "antd";
 
 import { createUser } from "./createUser";
 
 const Register = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSuccess = (r) => {
+    setIsLoading(false);
     console.log(r.data);
   };
 
   const onError = (e) => {
+    setIsLoading(false);
     console.log(e);
   };
 
   const onFinish = (values) => {
+    setIsLoading(true);
     createUser(values, onSuccess, onError);
   };
 
@@ -94,7 +101,7 @@ const Register = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block loading={isLoading}>
               Submit
             </Button>
           </Form.Item>

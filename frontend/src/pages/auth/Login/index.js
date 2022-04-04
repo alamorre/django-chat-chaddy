@@ -1,8 +1,25 @@
+import { useState } from "react";
+
 import { Col, Row, Form, Input, Button, Checkbox } from "antd";
 
+import { login } from "./login";
+
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSuccess = (r) => {
+    setIsLoading(false);
+    console.log(r.data);
+  };
+
+  const onError = (e) => {
+    setIsLoading(false);
+    console.log(e);
+  };
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+    setIsLoading(true);
+    login(values, onSuccess, onError);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -60,7 +77,7 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ span: 24 }}>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block loading={isLoading}>
               Submit
             </Button>
           </Form.Item>
