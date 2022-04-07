@@ -2,12 +2,10 @@ import { useContext } from "react";
 
 import { Context } from "../../../context";
 
+import MyAccount from "./MyAccount";
+
 import { Menu, notification } from "antd";
-import {
-  CommentOutlined,
-  UserOutlined,
-  LogoutOutlined,
-} from "@ant-design/icons";
+import { CommentOutlined, LogoutOutlined } from "@ant-design/icons";
 
 const UserHeader = () => {
   const { setUser } = useContext(Context);
@@ -34,13 +32,7 @@ const UserHeader = () => {
       >
         My Chats
       </Menu.Item>
-      <Menu.Item
-        style={{ lineHeight: "64px" }}
-        key="app"
-        icon={<UserOutlined />}
-      >
-        My Account
-      </Menu.Item>
+      <MyAccount />
       <Menu.Item
         style={{ lineHeight: "64px" }}
         key="logout"

@@ -1,7 +1,5 @@
-from django.shortcuts import render
-
 from rest_framework import generics
-from rest_framework import permissions
+from rest_framework import permissions, status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,25 +7,25 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
 
-class UserList(generics.CreateAPIView):
+class Users(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class Login(APIView):
+class MyAccount(APIView):
     permissions=[permissions.IsAuthenticated]
-    def get(self, request, format=None):
+
+    def get(self, request):
         serializer = UserSerializer(request.user, many=False)
         return Response(serializer.data)
+
+    def patch(self, request):
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        request.user.delete()
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
     
-
-class IsOwner(permissions.BasePermission):
-    """
-    Custom permission to only allow owners of an object
-    """
-    def has_object_permission(self, request, view, obj):
-        return obj == request.user
-
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsOwner]
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
