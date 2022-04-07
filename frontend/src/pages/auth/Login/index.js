@@ -10,10 +10,15 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useContext(Context);
 
-  const onSuccess = (r) => {
+  const onSuccess = (r, values) => {
     setIsLoading(false);
     setError("");
-    setUser(r.data);
+
+    const user = r.data;
+    user.secret = user.password;
+    user.password = values.password;
+    setUser(user);
+
     notification.success({
       message: "Welcome back!",
       placement: "bottomLeft",
@@ -27,7 +32,7 @@ const Login = () => {
 
   const onFinish = (values) => {
     setIsLoading(true);
-    login(values, onSuccess, onError);
+    login(values, (r) => onSuccess(r, values), onError);
   };
 
   const onFinishFailed = (errorInfo) => {

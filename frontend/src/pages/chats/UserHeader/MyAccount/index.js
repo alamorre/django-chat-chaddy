@@ -48,10 +48,6 @@ const MyAccount = () => {
         onCancel={handleCancel}
         footer={null}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-
         <Button type="danger" onClick={onDelete}>
           Delete Account
         </Button>

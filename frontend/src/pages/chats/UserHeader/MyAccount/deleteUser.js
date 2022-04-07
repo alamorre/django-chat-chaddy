@@ -5,7 +5,7 @@ export const deleteUser = (values, onSuccess, onError) => {
   const token = btoa(str);
 
   axios
-    .delete("http://127.0.0.1:8000/users/me/", {
+    .get("http://127.0.0.1:8000/users/me/", {
       headers: { Authorization: `Basic ${token}` },
     })
     .then((r) => onSuccess(r))

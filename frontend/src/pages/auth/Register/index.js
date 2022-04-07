@@ -11,10 +11,15 @@ const Register = () => {
 
   const { setUser } = useContext(Context);
 
-  const onSuccess = (r) => {
+  const onSuccess = (r, values) => {
     setIsLoading(false);
     setError("");
-    setUser(r.data);
+
+    const user = r.data;
+    user.secret = user.password;
+    user.password = values.password;
+    setUser(user);
+
     notification.success({
       message: "Welcome!",
       placement: "bottomLeft",
@@ -28,7 +33,7 @@ const Register = () => {
 
   const onFinish = (values) => {
     setIsLoading(true);
-    createUser(values, onSuccess, onError);
+    createUser(values, (r) => onSuccess(r, values), onError);
   };
 
   const onFinishFailed = (errorInfo) => {

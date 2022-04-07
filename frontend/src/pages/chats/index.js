@@ -13,7 +13,7 @@ const projectId = "70049943-b572-4372-9f3c-fbdeca940e0f";
 const ChatsPage = () => {
   const { user } = useContext(Context);
 
-  const chatProps = useMultiChatLogic(projectId, user.username, user.password);
+  const chatProps = useMultiChatLogic(projectId, user.username, user.secret);
 
   if (!user) {
     return <div />;
