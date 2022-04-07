@@ -36,10 +36,6 @@ const Register = () => {
     createUser(values, (r) => onSuccess(r, values), onError);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <Row
       style={{
@@ -62,7 +58,6 @@ const Register = () => {
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
           style={{ paddingTop: "18px" }}
         >
