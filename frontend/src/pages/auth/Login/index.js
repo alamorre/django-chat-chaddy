@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-import { Col, Row, Form, Input, Button, Checkbox } from "antd";
+import { Col, Row, Form, Input, Button, Checkbox, notification } from "antd";
 
 import { login } from "./login";
+import { Context } from "../../../context";
 
-const Login = (props) => {
+const Login = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { setUser } = useContext(Context);
 
   const onSuccess = (r) => {
     setIsLoading(false);
     setError("");
-    props.onAuth(r.data);
+    setUser(r.data);
+    notification.success({
+      message: "Welcome back!",
+      placement: "bottomLeft",
+    });
   };
 
   const onError = (e) => {

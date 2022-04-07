@@ -1,28 +1,34 @@
+import { useContext } from "react";
+
+import { Context } from "../../context";
+
+import UserHeader from "./UserHeader";
 import {
   MultiChatWindow,
   useMultiChatLogic,
   MultiChatSocket,
 } from "react-chat-engine-advanced";
-
 const projectId = "70049943-b572-4372-9f3c-fbdeca940e0f";
 
-const ChatsPage = (props) => {
-  console.log("props.user", props.user);
+const ChatsPage = () => {
+  const { user } = useContext(Context);
 
-  const chatProps = useMultiChatLogic(
-    projectId,
-    props.user.username,
-    props.user.password
-  );
+  const chatProps = useMultiChatLogic(projectId, user.username, user.password);
 
-  if (!props.user) return <div />;
-
-  return (
-    <div>
-      <MultiChatSocket {...chatProps} />
-      <MultiChatWindow {...chatProps} style={{ height: "100vh" }} />
-    </div>
-  );
+  if (!user) {
+    return <div />;
+  } else {
+    return (
+      <div>
+        <UserHeader />
+        <MultiChatSocket {...chatProps} />
+        <MultiChatWindow
+          {...chatProps}
+          style={{ height: "calc(100vh - 64px)" }}
+        />
+      </div>
+    );
+  }
 };
 
 export default ChatsPage;
