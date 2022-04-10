@@ -1,22 +1,23 @@
-from rest_framework import generics
 from rest_framework import permissions, status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from django.contrib.auth.models import User
 from .serializers import UserSerializer
 
-class Users(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
 class MyAccount(APIView):
-    permissions=[permissions.IsAuthenticated]
+    permissions=[permissions.IsAuthenticated, permissions.AllowAny]
 
     def get(self, request):
         serializer = UserSerializer(request.user, many=False)
         return Response(serializer.data)
+
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request):
         serializer = UserSerializer(request.user, data=request.data, partial=True)

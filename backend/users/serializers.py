@@ -19,17 +19,14 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        custom_json = validated_data.pop('custom_json', None)
-        avatar = validated_data.pop('avatar', None)
-
+        # custom_json = validated_data.pop('custom_json', None)
+        # avatar = validated_data.pop('avatar', None)
         validated_data['password'] = make_password(validated_data.get('password'))
         user = super(UserSerializer, self).create(validated_data)
-        
-        if avatar is not None:
-            user.profile.avatar = avatar
-        user.profile.custom_json = custom_json
-        user.profile.save()
-
+        # if avatar is not None:
+        #     user.profile.avatar = avatar
+        # user.profile.custom_json = custom_json
+        # user.profile.save()
         return user
 
     def update(self, instance, validated_data):
