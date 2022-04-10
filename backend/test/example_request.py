@@ -8,7 +8,7 @@ basic_auth_b64_string = basic_auth_b64_bytes.decode('ascii')
 
 # Get a User
 r = requests.get(
-    'http://127.0.0.1:8000/users/14/',
+    'http://127.0.0.1:8000/users/me/',
     headers={"Authorization": "Basic {}".format(basic_auth_b64_string)}
 )
 print(r)

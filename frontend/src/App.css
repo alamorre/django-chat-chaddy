@@ -3,3 +3,16 @@
 * {
   font-family: Avenir;
 }
+
+.ce-avatar-status {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.ce-message-form {
+  width: 105% !important;
+}
+
+#msg-textarea {
+  top: 4px !important;
+}
