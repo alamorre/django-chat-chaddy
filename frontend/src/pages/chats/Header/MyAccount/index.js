@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Modal, Menu } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
-import EditAccount from "./EditAccount";
+import EditAccount from "./UpdateAccount";
 import DeleteAccount from "./DeleteAccount";
 
 const MyAccount = () => {
@@ -28,7 +28,6 @@ const MyAccount = () => {
         footer={null}
       >
         <EditAccount onComplete={() => setIsVisible(false)} />
-
         <DeleteAccount />
       </Modal>
     </>

@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { Context } from "../../context";
 
-import UserHeader from "./UserHeader";
+import Header from "./Header";
 import {
   MultiChatWindow,
   useMultiChatLogic,
@@ -20,7 +20,8 @@ const ChatsPage = () => {
   } else {
     return (
       <div>
-        <UserHeader />
+        <Header />
+
         <MultiChatSocket {...chatProps} />
         <MultiChatWindow
           {...chatProps}
