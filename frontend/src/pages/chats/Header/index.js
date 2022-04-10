@@ -29,7 +29,7 @@ const Header = () => {
           float: "left",
         }}
       >
-        Chaddy
+        💬 Chaddy
       </div>
 
       <Menu
